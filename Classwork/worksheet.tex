@@ -69,6 +69,31 @@
 \thispagestyle{empty}
 \endgroup
 }
+
+
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
+
+\titlecontents{part}%
+    [0pt]% distance from left margin
+    {\addvspace{0.25\baselineskip}}% above (global formatting of entry)
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/ label (label = ``Part I'')
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/o label
+    {}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+
+\titlecontents{chapter}%
+    [4em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{2em}\textit}% before w/ label (label = ``Chapter 1'')
+    {\hspace{0em}\textit}% before w/o label
+    {\qquad\thecontentspage}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+%%%% End additional code by Kevin Godby
+
 \makeatother
 
 
@@ -129,8 +154,62 @@
 \makeatother
 
 
+% Set table of contents depth to 3 (includes subsubsections)
+\setcounter{tocdepth}{3}
+\makeatletter
+% Chapter entries (level 0) - no indentation
+\titlecontents{chapter}%
+    [0em]% distance from left margin
+    {\addvspace{1em}\bfseries}% above (global formatting of entry)
+    {\contentslabel{1.5em}}% before w/ label
+    {\hspace{0em}}% before w/o label
+    {\titlerule*[.5pc]{.}\contentspage}% filler and page
+    [\addvspace{0.5em}]% after
+
+% Section entries (level 1) - slight indentation
+\titlecontents{section}%
+    [1.5em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{2.0em}}% before w/ label
+    {\hspace{0em}}% before w/o label
+    {\titlerule*[.5pc]{.}\contentspage}% filler and page
+    []% after
+
+% Subsection entries (level 2) - more indentation
+\titlecontents{subsection}%
+    [3.5em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{2.5em}}% before w/ label
+    {\hspace{0em}}% before w/o label
+    {\titlerule*[.5pc]{.}\contentspage}% filler and page
+    []% after
+
+% Subsubsection entries (level 3) - most indentation
+\titlecontents{subsubsection}%
+    [6em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{3.0em}}% before w/ label
+    {\hspace{0em}}% before w/o label
+    {\titlerule*[.5pc]{.}\contentspage}% filler and page
+    []% after
+\makeatother
+
+% Custom table of contents with 'Content' title that doesn't appear in TOC
+\makeatletter
+\renewcommand{\tableofcontents}{%
+  \clearpage
+  \thispagestyle{plain}%
+  {\Huge\em Content}\par
+  \vspace{1em}
+  \@starttoc{toc}%
+}
+\makeatother
+
 \begin{document}
 \maketitle
+
+
+\tableofcontents
 
 
 \chapter{Mathematical Preliminaries}
@@ -327,5 +406,134 @@
     Therefore, $\sin x = \frac{e^{ix}-e^{-ix}}{2i}$.
 
 \end{enumerate}
+
+%---------------------------------------
+%---------------------------------------
+%---------------------------------------
+
+
+\section{Trigonometry}
+\begin{enumerate}
+    \item \textbf{4 pts} Draw a circle and mark $\frac{\pi}{6}$, $\frac{\pi}{3}$, $\frac{\pi}{4}$, and $\frac{3\pi}{4}$.
+    
+    \textbf{Solution:}
+    
+    \includegraphics[width=0.6\linewidth]{../Code/figures/Ch01_radian_marking.pdf}
+
+    \item \textbf{1 pts} Convert $\frac{3\pi}{2}$ radians into degrees.
+    
+     \textbf{Solution:}
+     
+    \begin{multiequation}
+        \frac{3\pi}{2} \times \frac{180^\circ}{\pi} = 270^\circ
+    \end{multiequation}
+
+    \item \textbf{3 pts} Find the value of $\theta: 4\sin^2\theta=3$.
+    
+     \textbf{Solution:}
+     
+    \begin{multiequation}
+        4\sin^2\theta &= 3 \\
+        \sin^2\theta &= \frac{3}{4} \\
+        \sin\theta &= \pm\frac{\sqrt{3}}{2}
+    \end{multiequation}
+    
+    If $\sin\theta = \frac{\sqrt{3}}{2}$, then $\theta = 60^\circ$ or $\theta = 120^\circ$ (Quadrant I and II).
+    
+    If $\sin\theta = -\frac{\sqrt{3}}{2}$, then $\theta = 240^\circ$ or $\theta = 300^\circ$ (Quadrant III and IV).
+
+
+    \item \textbf{3 pts} Find the value of $x: 2\sin^2x-3\sin x+1=0$.
+    
+     \textbf{Solution:}
+     
+    \begin{multiequation}
+        2\sin^2x-3\sin x+1 &= 0 \\
+        2\sin^2x-2\sin x-\sin x+1 &= 0 \\
+        2\sin x(\sin x-1)-1(\sin x-1) &= 0 \\
+        (2\sin x-1)(\sin x-1) &= 0
+    \end{multiequation}
+    
+    This gives two possible solutions:
+    
+    $2\sin x - 1 = 0 \implies \sin x = \frac{1}{2}$.
+    
+    $\sin x - 1 = 0 \implies \sin x = 1$.
+
+    For $\sin x = \frac{1}{2}$, $x = \frac{\pi}{6}$ or $x = \frac{5\pi}{6}$.
+    
+    For $\sin x = 1$, $x = \frac{\pi}{2}$.
+    
+    The general solutions are $x = \frac{\pi}{6}+2\pi K$, $x = \frac{5\pi}{6}+2\pi K$, and $x = \frac{\pi}{2}+2\pi K$.
+
+    \item \textbf{5 pts} Prove: $(1-\sin^2(t))(1+\tan^2(t))=1$.
+    
+    \textbf{Solution:}
+    
+    \begin{multiequation}
+        (1-\sin^2(t))(1+\tan^2(t)) &= (\cos^2(t))(1+\tan^2(t)) \\
+        &= \cos^2(t) + \cos^2(t)\tan^2(t) \\
+        &= \cos^2(t) + \cos^2(t)\frac{\sin^2(t)}{\cos^2(t)} \\
+        &= \cos^2(t) + \sin^2(t) \\
+        &= 1
+    \end{multiequation}
+
+    \item \textbf{5 pts} Prove: $\frac{\sin^3(t)+\cos^3(t)}{\sin(t)+\cos(t)}=1-\sin(t)\cos(t)$.
+    
+    \textbf{Solution:}
+    
+    Using the identity $a^3+b^3=(a+b)(a^2-ab+b^2)$.
+    
+    Let $a=\sin(t)$ and $b=\cos(t)$.
+
+    \begin{multiequation}
+        \frac{\sin^3(t)+\cos^3(t)}{\sin(t)+\cos(t)} &= \frac{(\sin(t)+\cos(t))(\sin^2(t)-\sin(t)\cos(t)+\cos^2(t))}{\sin(t)+\cos(t)} \\
+        &= \sin^2(t)+\cos^2(t)-\sin(t)\cos(t) \\
+        &= 1-\sin(t)\cos(t)
+    \end{multiequation}
+
+    \item \textbf{2 pts} What is the value of $\sin\theta$ and $\cos\theta$ given $\tan\theta=\frac{4}{3}$?
+    
+    \textbf{Solution:}
+    
+    $\tan\theta = \frac{4}{3} = \frac{\text{Perpendicular}}{\text{Base}}$.
+    
+    The hypotenuse is $h = \sqrt{3^2+4^2} = \sqrt{9+16} = \sqrt{25} = 5$.
+    
+    $\sin\theta = \frac{\text{Perpendicular}}{\text{Hypotenuse}} = \frac{4}{5}$.
+    
+    $\cos\theta = \frac{\text{Base}}{\text{Hypotenuse}} = \frac{3}{5}$.
+
+    \item \textbf{2 pts} Find the value of $\sin\theta$ and $\cos\theta$ from the triangle.
+
+    \includegraphics[width=0.4\linewidth]{../Code/figures/Ch01_triangle_drawing.pdf}
+    
+\textbf{Solution:}
+
+    From the right-angled triangle with sides 1, 1 and hypotenuse $\sqrt{2}$:
+    $\sin\theta = \frac{\text{Opposite}}{\text{Hypotenuse}} = \frac{1}{\sqrt{2}}$.
+    
+    $\cos\theta = \frac{\text{Adjacent}}{\text{Hypotenuse}} = \frac{1}{\sqrt{2}}$.
+
+    \item \textbf{3 pts} Prove $\sin^{-1}(\frac{\sqrt{2}}{2})-\sin^{-1}(\frac{1}{2})=\frac{\pi}{12}$.
+
+\textbf{Solution:}    
+    
+    $\sin^{-1}(\frac{\sqrt{2}}{2}) = \frac{\pi}{4}$.
+    
+    $\sin^{-1}(\frac{1}{2}) = \frac{\pi}{6}$.
+    
+    $\sin^{-1}(\frac{\sqrt{2}}{2})-\sin^{-1}(\frac{1}{2}) = \frac{\pi}{4}-\frac{\pi}{6} = \frac{3\pi-2\pi}{12} = \frac{\pi}{12}$.
+
+    \item \textbf{2 pts} Find the value of $x$ given $2\sin x=1$.
+    
+    \textbf{Solution:}
+    
+    $2\sin x=1 \implies \sin x = \frac{1}{2}$.
+    
+    For $\sin x = \frac{1}{2}$, $x = \frac{\pi}{6}$ or $x = \frac{5\pi}{6}$.
+
+\end{enumerate}
+
 \end{document}
 
