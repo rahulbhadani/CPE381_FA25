@@ -88,95 +88,6 @@ apple/.pic={
 \end{frame}
 
 
-\section{Infinite Series}
-
-
-\begin{frame}{}
-    \begin{center}
-    \Huge \bf \color{DarkBlue}
-    \faFire
-    
-    Infinite Series
-\end{center}
-\end{frame}
-
-
-\begin{frame}{Sum of an Infinite Sequence}
-An infinite series is the sum of an infinite sequence of numbers:
-$$a_1 + a_2 + a_3 + \cdots + a_n + \cdots$$
-The goal is to understand the meaning of such an infinite sum and develop methods to calculate it.
-\end{frame}
-
-\begin{frame}{Partial Sums}
-The $n$-th partial sum is:
-$$S_n := a_1 + a_2 + a_3 + \cdots + a_n$$
-As $n$ gets larger, the partial sums get closer to a limiting value.
-\end{frame}
-
-\begin{frame}{Example 1}
-Consider the series:
-$$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \cdots$$
-The partial sums are:
-$$S_1 = 1$$
-$$S_2 = 1 + \frac{1}{2} = \frac{3}{2}$$
-$$S_3 = 1 + \frac{1}{2} + \frac{1}{4} = \frac{7}{4}$$
-$$S_n = 1 + \frac{1}{2} + \frac{1}{4} + \cdots + \frac{1}{2^{n-1}} =  \frac{2^n - 1}{2^{n-1}}$$
-\end{frame}
-
-\begin{frame}{Convergence of the Series}
-
-$$
-S = \lim_{n \to \infty} S_n = \lim_{n\to \infty} \cfrac{2^n - 1}{2^{n-1}} =   \lim_{n \to \infty} \bigg (  \cfrac{2^n}{2^{n-1}} - \cfrac{1}{2^{n-1}}\bigg) =  \lim_{n \to \infty} \bigg( 2 - \cfrac{1}{2^{n-1}}\bigg) 2
-$$
-
-Since the sequence of partial sums converges, the infinite series converges. That is to say:
-
-$$\sum_{n=1}^{\infty} \frac{1}{2^{n-1}} = 2$$
-\end{frame}
-
-\begin{frame}{Geometric Series}
-A geometric series is of the form:
-$$a + ar + ar^2 + ar^3 + \cdots + ar^n + \cdots = \sum_{n=1}^{\infty} ar^{n-1} = \sum_{n=0}^{\infty} ar^n$$
-\end{frame}
-
-\begin{frame}{Convergence of Geometric Series}
-If $|r| < 1$, the geometric series converges:
-$$\sum_{n=1}^{\infty} ar^{n-1} = \frac{a}{1 - r}$$
-If $|r| \geq 1$, the series diverges.
-\end{frame}
-
-\begin{frame}{Example 2}
-Consider the series:
-$$\sum_{n=0}^{\infty} (-1)^n \frac{5}{4^n}$$
-This is a geometric series with $a = 5$ and $r = -\frac{1}{4}$. Since $|r| < 1$, the series converges:
-$$\sum_{n=1}^{\infty} 5 \left(-\frac{1}{4}\right)^{n-1} = \frac{5}{1 - \left(-\frac{1}{4}\right)} = 4$$
-\end{frame}
-
-\begin{frame}{Example 3: Telescoping Series}
-Find the sum of the telescoping series:
-$$\sum_{n=1}^{\infty} \frac{1}{n(n+1)} = \sum_{n=1}^{\infty} \left(\frac{1}{n} - \frac{1}{n+1}\right)$$
-The partial sums are:
-$$S_n = 1 - \frac{1}{n+1} \to 1 \text{ as } n \to \infty$$
-\end{frame}
-
-\begin{frame}{Theorem}
-If the series $\sum_{n=1}^{\infty} a_n$ converges, then $\lim_{n \to \infty} a_n = 0$.
-\end{frame}
-
-\begin{frame}{Divergence Test}
-The series $\sum_{n=1}^{\infty} a_n$ diverges if $\lim_{n \to \infty} a_n$ fails to exist or is different from zero.
-\end{frame}
-
-\begin{frame}{Practice Problems}
-Determine whether the following series converge or diverge. In the case of convergence, give the sum of the series.
-\begin{enumerate}
-    \item $\sum_{n=1}^{\infty} \frac{1}{2^n}$
-    \item $\sum_{n=1}^{\infty} \frac{n+1}{2n-3}$
-    \item $\sum_{n=2}^{\infty} \frac{n^2}{n^2-1}$
-    \item $\sum_{n=1}^{\infty} \frac{n(n+2)}{(n+3)^2}$
-    \item $\sum_{n=1}^{\infty} \frac{1+2n}{3^n}$
-\end{enumerate}
-\end{frame}
 
 \section{Continuous and Discrete Representations}
 
@@ -340,7 +251,7 @@ $$
 \begin{itemize}
     \item Using \( T_s = 10^{-3} \):
     $$
-    \sum_{n=0}^{(10/T_s)-1} nT_s^2 = \sum_{n=0}^{(10/T_s)-1} n 10^{-6} = = 49.995
+    \sum_{n=0}^{(10/T_s)-1} nT_s^2 = \sum_{n=0}^{(10/T_s)-1} n 10^{-6} = 49.995
     $$
     The height of each pulse is $nT_s$ and the width is $T_s$.
 \end{itemize}

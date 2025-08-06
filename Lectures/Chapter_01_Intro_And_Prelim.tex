@@ -199,7 +199,11 @@ apple/.pic={
 
 \begin{itemize}
 \item Each lecture will be followed by in-class problem-solving that students will turn in the next lecture day. If you miss the lecture day (either the day it is handed to you, or the day you need to turn in), you will not receive any credit.
+
+\item There will be intermediate small tests to assess your skills based on lectures and the classwork. This portion will count towards your classwork credits.
 \end{itemize}
+
+
 
 \end{frame}
 
@@ -567,6 +571,123 @@ Can you find out, what should be the value of $e^{iy}$ where $y$ is the real num
 \end{frame}
 
 
+\section{Infinite Series}
+
+
+\begin{frame}{}
+    \begin{center}
+    \Huge \bf \color{DarkBlue}
+    \faFire
+    
+    Infinite Series
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Sum of an Infinite Sequence}
+An infinite series is the sum of an infinite sequence of numbers:
+$$a_1 + a_2 + a_3 + \cdots + a_n + \cdots$$
+The goal is to understand the meaning of such an infinite sum and develop methods to calculate it.
+\end{frame}
+
+\begin{frame}{Partial Sums}
+The $n$-th partial sum is:
+$$S_n := a_1 + a_2 + a_3 + \cdots + a_n$$
+As $n$ gets larger, the partial sums get closer to a limiting value.
+\end{frame}
+
+\begin{frame}{Example 1}
+Consider the series:
+$$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \cdots$$
+The partial sums are:
+$$S_1 = 1$$
+$$S_2 = 1 + \frac{1}{2} = \frac{3}{2}$$
+$$S_3 = 1 + \frac{1}{2} + \frac{1}{4} = \frac{7}{4}$$
+$$S_n = 1 + \frac{1}{2} + \frac{1}{4} + \cdots + \frac{1}{2^{n-1}} =  \frac{2^n - 1}{2^{n-1}}$$
+\end{frame}
+
+\begin{frame}{Convergence of the Series}
+
+$$
+S = \lim_{n \to \infty} S_n = \lim_{n\to \infty} \cfrac{2^n - 1}{2^{n-1}} =   \lim_{n \to \infty} \bigg (  \cfrac{2^n}{2^{n-1}} - \cfrac{1}{2^{n-1}}\bigg) =  \lim_{n \to \infty} \bigg( 2 - \cfrac{1}{2^{n-1}}\bigg) 2
+$$
+
+Since the sequence of partial sums converges, the infinite series converges. That is to say:
+
+$$\sum_{n=1}^{\infty} \frac{1}{2^{n-1}} = 2$$
+\end{frame}
+
+\begin{frame}{Arithmetic Progression (AP)}
+An artihmetic series is of the form: $a, (a+d), (a+2d), \cdots (a+(n-1)d)$.
+
+The sum can be written as:
+
+$$
+S_n = a + (a+d)  + (a+2d) + \cdots +(a + (n-1)d) = \cfrac{n}{2}[2a + (n-1)d]
+$$
+
+$
+a = \text{The first term}
+$, $ d = \text{common difference}$.
+\end{frame}
+
+
+\begin{frame}{Geometric Series/Geometric Progression}
+A geometric series is of the form: $a, ar, ar^2, \cdots ar^n$.
+
+The sum can be written as:
+
+
+$$S_n = a + ar + ar^2 + ar^3 + \cdots + ar^n + \cdots = \sum_{n=1}^{\infty} ar^{n-1} = \sum_{n=0}^{\infty} ar^n$$
+
+$
+a = \text{The first term}
+$, $ r = \text{common ratio}$.
+
+
+\end{frame}
+
+\begin{frame}{Convergence of Geometric Series}
+If $|r| < 1$, the geometric series converges:
+$$\sum_{n=1}^{\infty} ar^{n-1} = \frac{a}{1 - r}$$
+If $|r| \geq 1$, the series diverges.
+\end{frame}
+
+\begin{frame}{Example 2}
+Consider the series:
+$$\sum_{n=0}^{\infty} (-1)^n \frac{5}{4^n}$$
+This is a geometric series with $a = 5$ and $r = -\frac{1}{4}$. Since $|r| < 1$, the series converges:
+$$\sum_{n=1}^{\infty} 5 \left(-\frac{1}{4}\right)^{n-1} = \frac{5}{1 - \left(-\frac{1}{4}\right)} = 4$$
+\end{frame}
+
+\begin{frame}{Example 3: Telescoping Series}
+Find the sum of the telescoping series:
+$$\sum_{n=1}^{\infty} \frac{1}{n(n+1)} = \sum_{n=1}^{\infty} \left(\frac{1}{n} - \frac{1}{n+1}\right)$$
+The partial sums are:
+$$S_n = 1 - \frac{1}{n+1} \to 1 \text{ as } n \to \infty$$
+\end{frame}
+
+\begin{frame}{Theorem}
+If the series $\sum_{n=1}^{\infty} a_n$ converges, then $\lim_{n \to \infty} a_n = 0$.
+\end{frame}
+
+\begin{frame}{Divergence Test}
+The series $\sum_{n=1}^{\infty} a_n$ diverges if $\lim_{n \to \infty} a_n$ fails to exist or is different from zero.
+\end{frame}
+
+\begin{frame}{Practice Problems}
+Determine whether the following series converge or diverge. In the case of convergence, give the sum of the series.
+\begin{enumerate}
+    \item $\sum_{n=1}^{\infty} \frac{1}{2^n}$
+    \item $\sum_{n=1}^{\infty} \frac{n+1}{2n-3}$
+    \item $\sum_{n=2}^{\infty} \frac{n^2}{n^2-1}$
+    \item $\sum_{n=1}^{\infty} \frac{n(n+2)}{(n+3)^2}$
+    \item $\sum_{n=1}^{\infty} \frac{1+2n}{3^n}$
+\end{enumerate}
+\end{frame}
+
+
+
 %-----------------------------------------
 
 \begin{frame}{Derivatives}
@@ -651,6 +772,38 @@ the slope of the graph is 0.
     \item Set this formula equal to $0$ and solve for $x$.
 \end{itemize}
 \end{frame}
+
+
+
+\begin{frame}{Taylor Series}
+\textbf{Function approximation:}
+\[
+f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots
+\]
+
+\textbf{Signal processing examples:}
+\begin{align*}
+e^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots \\
+\cos(\omega t) &= 1 - \frac{(\omega t)^2}{2!} + \frac{(\omega t)^4}{4!} - \cdots \\
+\ln(1+t) &= t - \frac{t^2}{2} + \frac{t^3}{3} - \cdots \quad (|t|<1)
+\end{align*}
+\end{frame}
+
+
+\begin{frame}{Taylor Series Applications}
+\textbf{Small-angle approximation:} \\
+$\sin\theta \approx \theta - \frac{\theta^3}{6}$ for $\theta \ll 1$ \\
+Error at $\theta=0.1$ rad: $| \text{Actual} - \text{Approx} | < 0.001\%$
+
+\vspace{20pt}
+
+\textbf{Nonlinear system analysis:} \\
+$y(t) = e^{x(t)} \approx 1 + x(t) + \frac{x^2(t)}{2}$ \\
+When $x(t) = 0.2\cos(2\pi f t)$, \\
+$y(t) \approx 1 + 0.2\cos(2\pi f t) + 0.02\cos^2(2\pi f t)$
+\end{frame}
+
+
 
 \begin{frame}{Integration}
 \begin{center}
