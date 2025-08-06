@@ -1,0 +1,331 @@
+%\documentclass[11pt, xcolor=dvipsnames,svgnames,x11names]{article}
+\documentclass[nohyper,nobib,xcolor=dvipsnames,svgnames,x11names]{tufte-book}
+
+\title{Signals and Systems for Computer Engineers}
+\date{Worksheet}
+\author[Rahul Bhadani]{Rahul Bhadani}
+\publisher{Department of Electrical \& Computer Engineering, The University of Alabama in Huntsville}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=SeaGreen,
+    urlcolor=SeaGreen,
+    citecolor=SeaGreen,
+    filecolor=SeaGreen
+}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{shadings}
+\usepackage{eso-pic}
+\usepackage{tkz-euclide}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{wesa}
+
+
+\newenvironment{multiequation}{%
+  \setlength{\abovedisplayskip}{3pt}      % Reduce space above the equation
+  \setlength{\belowdisplayskip}{6pt}      % Reduce space below the equation
+  \setlength{\abovedisplayshortskip}{3pt} % Reduce space above short equations
+  \setlength{\belowdisplayshortskip}{6pt} % Reduce space below short equations
+  \begin{equation}%                       % Start an unnumbered equation
+    \begin{aligned}%                      % Align multiple lines
+}{%
+    \end{aligned}%                        % End alignment
+  \end{equation}%                         % End equation
+}
+
+
+\definecolor{darkrose}{HTML}{9F3450}
+\definecolor{forestgreen}{HTML}{35a17f}
+\definecolor{lightindigo}{RGB}{150, 150, 255}
+\definecolor{faintred}{RGB}{255, 200, 200}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand{\maketitlepage}{%
+\begingroup%
+\setlength{\parindent}{0pt}
+
+{\fontsize{24}{24}\selectfont\textit{\@author}\par}
+
+\vspace{1.5in}{\fontsize{30}{24}\selectfont\@title\par}
+
+
+\vspace{0.5in}{\fontsize{20}{14}\selectfont\textsf{\smallcaps{\@date}}\par}
+
+
+
+
+\vfill{\fontsize{14}{14}\selectfont\textit{\@publisher}\par}
+
+\thispagestyle{empty}
+\endgroup
+}
+\makeatother
+
+
+
+\titlecontents{part}%
+    [0pt]% distance from left margin
+    {\addvspace{0.25\baselineskip}}% above (global formatting of entry)
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/ label (label = ``Part I'')
+    {\allcaps{Part~\thecontentslabel}\allcaps}% before w/o label
+    {}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+
+\titlecontents{chapter}%
+    [4em]% distance from left margin
+    {}% above (global formatting of entry)
+    {\contentslabel{2em}\textit}% before w/ label (label = ``Chapter 1'')
+    {\hspace{0em}\textit}% before w/o label
+    {\qquad\thecontentspage}% filler and page (leaders and page num)
+    [\vspace*{0.5\baselineskip}]% after
+%%%% End additional code by Kevin Godby
+
+\makeatletter
+% Redefine chapter to prevent empty pages
+\renewcommand{\chapter}{%
+  \clearpage% Use clearpage instead of cleardoublepage
+  \thispagestyle{plain}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter
+}
+
+% Alternative approach - modify the openright behavior
+\@openrightfalse
+
+% Or if the above doesn't work, try this more direct approach:
+\let\cleardoublepage\clearpage
+\makeatother
+
+
+
+\makeatletter
+% Force chapter numbering
+\setcounter{secnumdepth}{2}
+
+% Override tufte-book's chapter command to include numbering
+\let\oldchapter\chapter
+\renewcommand{\chapter}[1]{%
+  \refstepcounter{chapter}%
+  \oldchapter*{\color{darkrose}{\thechapter. #1}}% Use chapter* with our numbering
+  \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#1}%
+}
+
+% Handle unnumbered chapters (like those created with \chapter*)
+\let\oldschapter\@schapter
+\renewcommand{\@schapter}[1]{%
+  \oldschapter{#1}%
+}
+\makeatother
+
+
+\begin{document}
+\maketitle
+
+
+\chapter{Mathematical Preliminaries}
+
+
+
+\section{Complex Numbers}
+
+\begin{enumerate}
+    \item \textbf{4pts} Plot the following complex numbers on the complex plane:
+    \begin{itemize}
+        \item $2+i3$
+        \item $3-i2$
+        \item $-2-i2$
+        \item $-4+j2$
+    \end{itemize}
+
+
+\textbf{Solution:}
+
+\includegraphics[width=1.0\linewidth]{../Code/figures/Ch01_complex_number_plotting.pdf}
+
+
+    \item \textbf{4pts} Express $\frac{-1+3i}{2+5i}$ in the form $a+ib$.
+
+\textbf{Solution:}    
+    
+    \begin{multiequation}
+        \frac{-1+3i}{2+5i} &= \frac{-1+3i}{2+5i} \times \frac{2-5i}{2-5i} \\
+        &= \frac{-2+5i+6i-15i^2}{2^2+5^2} \\
+        &= \frac{-2+11i+15}{4+25} \\
+        &= \frac{13+11i}{29} \\
+        &= \frac{13}{29} + \frac{11}{29}i
+    \end{multiequation}
+    
+
+    \item \textbf{2pts} If $Z=3+i5$ is a complex number, what is the value of the modulus $|Z|$?
+    
+    \textbf{Solution:}
+    
+    $$|Z| = \sqrt{3^2+5^2} = \sqrt{9+25} = \sqrt{34}$$
+
+    \item \textbf{4pts} Find the roots of the equation $x^2+x+1=0$.
+
+\textbf{Solution:}    
+    
+    For a quadratic equation $ax^2+bx+c=0$, the roots are given by $x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$.
+    In this case, $a=1$, $b=1$, $c=1$.
+    $$x = \frac{-1\pm\sqrt{1^2-4(1)(1)}}{2(1)} = \frac{-1\pm\sqrt{1-4}}{2} = \frac{-1\pm\sqrt{-3}}{2} = \frac{-1\pm i\sqrt{3}}{2}$$
+
+    \item \textbf{2pts} Write the following complex numbers in the polar form:
+    \begin{enumerate}
+        \item $z=1+i$
+        \item $w=\sqrt{3}-i$
+    \end{enumerate}
+    \textbf{Solution for (a):}
+    $|z|=\sqrt{1^2+1^2}=\sqrt{2}$
+    $\tan\theta = \frac{1}{1}=1$, so $\theta = \frac{\pi}{4}$.
+    In polar form: $z=\sqrt{2}(\cos\frac{\pi}{4}+i\sin\frac{\pi}{4})$.
+
+    \textbf{Solution for (b):}
+    $|w|=\sqrt{(\sqrt{3})^2+(-1)^2}=\sqrt{3+1}=\sqrt{4}=2$
+    $\tan\theta = \frac{-1}{\sqrt{3}}$, so $\theta = -\frac{\pi}{6}$ (since the number is in the 4th quadrant).
+    In polar form: $w=2(\cos(-\frac{\pi}{6})+i\sin(-\frac{\pi}{6}))$.
+
+    \item \textbf{4pts} Find the product of the complex numbers $1+i$ and $\sqrt{3}-i$ in the polar form.
+    
+    \textbf{Solution:}
+    
+    From the previous problem, we have:
+    $z_1 = 1+i = \sqrt{2}e^{i\pi/4}$
+    
+    $z_2 = \sqrt{3}-i = 2e^{-i\pi/6}$
+    
+    $z_1z_2 = (\sqrt{2}e^{i\pi/4})(2e^{-i\pi/6}) = 2\sqrt{2}e^{i(\pi/4-\pi/6)} = 2\sqrt{2}e^{i(\pi/12)}$
+    
+    In standard polar form: $2\sqrt{2}(\cos\frac{\pi}{12}+i\sin\frac{\pi}{12})$.
+
+    \item \textbf{2pts} Find $(\frac{1}{2}+\frac{1}{2}i)^{10}$.
+
+\textbf{Solution:}    
+    
+    First, convert to polar form:
+    
+    $\frac{1}{2}+\frac{1}{2}i = \frac{\sqrt{2}}{2}(\cos\frac{\pi}{4}+i\sin\frac{\pi}{4})$
+    
+    Using De Moivre's Theorem:
+    
+    $(\frac{1}{2}+\frac{1}{2}i)^{10} = (\frac{\sqrt{2}}{2})^{10}(\cos(10\cdot\frac{\pi}{4})+i\sin(10\cdot\frac{\pi}{4}))$
+    
+    $= (\frac{2^{1/2}}{2})^{10}(\cos(\frac{5\pi}{2})+i\sin(\frac{5\pi}{2}))$
+    
+    $= (\frac{1}{2^{1/2}})^{10}(\cos(\frac{\pi}{2}+2\pi)+i\sin(\frac{\pi}{2}+2\pi))$
+    
+    $= (\frac{1}{2^5})(0+i\cdot 1) = \frac{i}{32}$
+
+    \item \textbf{2pts} Evaluate or Simplify:
+    \begin{enumerate}
+        \item $e^{i\pi}$
+        \item $e^{-1+i\pi/2}$
+    \end{enumerate}
+    
+    \textbf{Solution for (a):}
+    $e^{i\pi} = \cos\pi+i\sin\pi = -1+i(0) = -1$.
+    
+    \textbf{Solution for (b):}
+    $e^{-1+i\pi/2} = e^{-1}e^{i\pi/2} = e^{-1}\bigg( \cos{\tfrac{\pi}{2}} + i \sin{\tfrac{\pi}{2}} \bigg) = \cfrac{1}{e}\bigg(0 + i(1) \bigg)= \cfrac{i}{e}$
+
+    \item \textbf{2pts} Evaluate the expression below and write your answer in the form $a+ib$.
+    \begin{enumerate}
+        \item $(5-i6)+(3+i2)$
+        \item $\frac{3}{4-i3}$
+    \end{enumerate}
+    \textbf{Solution for (a):}
+    $(5-i6)+(3+i2) = (5+3)+(-6+2)i = 8-4i$.
+    
+    \textbf{Solution for (b):}
+    $\frac{3}{4-i3} = \frac{3}{4-i3} \times \frac{4+i3}{4+i3} = \frac{12+i9}{4^2+3^2} = \frac{12+i9}{16+9} = \frac{12+i9}{25} = \frac{12}{25}+\frac{9}{25}i$.
+
+    \item \textbf{2pts} Find the complex conjugate and modulus of the number:
+    \begin{enumerate}
+        \item $12+i5$
+        \item $-1+2\sqrt{2}i$
+    \end{enumerate}
+    \textbf{Solution for (a):}
+    
+    Complex conjugate: $12-i5$.
+    
+    Modulus: $|12+i5| = \sqrt{12^2+5^2} = \sqrt{144+25} = \sqrt{169} = 13$.
+    
+    \textbf{Solution for (b):}
+    
+    Complex conjugate: $-1-2\sqrt{2}i$.
+    
+    Modulus: $|-1+2\sqrt{2}i| = \sqrt{(-1)^2+(2\sqrt{2})^2} = \sqrt{1+8} = \sqrt{9}=3$.
+
+    \item \textbf{2pts} Apply De Moivre's Theorem to simplify:
+    \begin{enumerate}
+        \item $(1+i)^{20}$
+        \item $(1-\sqrt{3}i)^{5}$
+        \item $(1-i)^{8}$
+    \end{enumerate}
+
+    \textbf{Solution for (a):}
+    
+    Convert $1+i$ to polar form: $r=\sqrt{1^2+1^2}=\sqrt{2}$, 
+    
+    $\theta=\tan^{-1}(\frac{1}{1})=\frac{\pi}{4}$.
+    
+    $1+i = \sqrt{2}(\cos\frac{\pi}{4}+i\sin\frac{\pi}{4})$.
+    
+    $(1+i)^{20} = (\sqrt{2})^{20}(\cos(20\cdot\frac{\pi}{4})+i\sin(20\cdot\frac{\pi}{4}))$
+   
+    $= 2^{10}(\cos(5\pi)+i\sin(5\pi)) = 1024(-1+0i) = -1024$.
+
+    \textbf{Solution for (b):}
+
+    Convert $1-\sqrt{3}i$ to polar form: $r=\sqrt{1^2+(-\sqrt{3})^2}=2$, $\theta=\tan^{-1}(\frac{-\sqrt{3}}{1})=-\frac{\pi}{3}$.
+    
+    $1-\sqrt{3}i = 2(\cos(-\frac{\pi}{3})+i\sin(-\frac{\pi}{3}))$.
+
+    $(1-\sqrt{3}i)^5 = 2^5(\cos(5\cdot(-\frac{\pi}{3}))+i\sin(5\cdot(-\frac{\pi}{3})))$
+
+    $= 32(\cos(-\frac{5\pi}{3})+i\sin(-\frac{5\pi}{3})) = 32(\cos(\frac{\pi}{3})+i\sin(\frac{\pi}{3}))$
+
+    $= 32(\frac{1}{2}+i\frac{\sqrt{3}}{2}) = 16(1+i\sqrt{3})$.
+
+    \textbf{Solution for (c):}
+    
+    Convert $1-i$ to polar form: $r=\sqrt{1^2+(-1)^2}=\sqrt{2}$, $\theta=\tan^{-1}(\frac{-1}{1})=-\frac{\pi}{4}$.
+
+    $1-i = \sqrt{2}(\cos(-\frac{\pi}{4})+i\sin(-\frac{\pi}{4}))$.
+
+    $(1-i)^8 = (\sqrt{2})^8(\cos(8\cdot(-\frac{\pi}{4}))+i\sin(8\cdot(-\frac{\pi}{4})))$
+
+    $= 2^4(\cos(-2\pi)+i\sin(-2\pi)) = 16(1+0i)=16$.
+
+    \item \textbf{3pts} Use Euler's formula to prove the following formulas for $\cos x$ and $\sin x$:
+    \begin{enumerate}
+        \item $\cos x = \frac{e^{ix}+e^{-ix}}{2}$
+        \item $\sin x = \frac{e^{ix}-e^{-ix}}{2i}$
+    \end{enumerate}
+    \textbf{Solution:}
+    Euler's formula states:
+    $e^{ix} = \cos x + i\sin x$
+    $e^{-ix} = \cos x - i\sin x$
+
+    To prove (a), add the two equations:
+    $e^{ix}+e^{-ix} = (\cos x + i\sin x) + (\cos x - i\sin x) = 2\cos x$.
+    Therefore, $\cos x = \frac{e^{ix}+e^{-ix}}{2}$.
+
+    To prove (b), subtract the second equation from the first:
+    $e^{ix}-e^{-ix} = (\cos x + i\sin x) - (\cos x - i\sin x) = 2i\sin x$.
+    Therefore, $\sin x = \frac{e^{ix}-e^{-ix}}{2i}$.
+
+\end{enumerate}
+\end{document}
+
