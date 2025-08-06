@@ -225,6 +225,16 @@
   }%
 }
 
+\definecolor{darkorange}{RGB}{255, 100, 0}
+
+% Redefine section command with dark orange color
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                     {-3.5ex \@plus -1ex \@minus -.2ex}%
+                     {2.3ex \@plus.2ex}%
+                     {\normalfont\Large\bfseries\color{darkorange}}}
+\makeatother
+
 
 \begin{document}
 \maketitle
