@@ -205,6 +205,27 @@
 }
 \makeatother
 
+\definecolor{lightorange}{RGB}{255, 245, 230}
+
+% Create a new command for fancy margin notes
+\newcommand{\fancymarginnote}[2][0pt]{%
+  \marginnote[#1]{%
+    \tikz[baseline=(text.base)]{%
+      \node[
+        fill=lightorange,
+        draw=SeaGreen,
+        line width=1pt,
+        text=darkrose,
+        rounded corners=3pt,
+        inner sep=4pt,
+        text width=\dimexpr\marginparwidth-8pt\relax,
+        font=\footnotesize
+      ] (text) {#2};
+    }%
+  }%
+}
+
+
 \begin{document}
 \maketitle
 
@@ -532,6 +553,136 @@
     $2\sin x=1 \implies \sin x = \frac{1}{2}$.
     
     For $\sin x = \frac{1}{2}$, $x = \frac{\pi}{6}$ or $x = \frac{5\pi}{6}$.
+
+\end{enumerate}
+
+\section{Calculus}
+
+\begin{enumerate}
+    \item Using the first principle, differentiate the function $f(x)=e^{2x}$ with respect to $x$.
+    
+    \textbf{Solution:}
+    We are given $f(x)=e^{2x}$. Thus, $f(x+h)=e^{2(x+h)}$.
+    The definition of the derivative is $\frac{d}{dx}(f(x))=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$.
+    Substituting the function:
+    \begin{multiequation}
+        \frac{d}{dx}(e^{2x}) &= \lim_{h\to0}\frac{e^{2(x+h)}-e^{2x}}{h} \\
+        &= \lim_{h\to0}\frac{e^{2x}e^{2h}-e^{2x}}{h} \\
+        &= \lim_{h\to0}\frac{e^{2x}(e^{2h}-1)}{h} \\
+        &= e^{2x} \lim_{h\to0}\frac{e^{2h}-1}{h}
+    \end{multiequation}
+    We use the known limit $\lim_{x\to0}\frac{e^x-1}{x}=1$.\fancymarginnote{$\lim_{x\to0}\frac{e^x-1}{x}=1$}
+    To apply this, we multiply the limit by $\frac{2}{2}$:
+    \begin{multiequation}
+        &= e^{2x} \left(\lim_{h\to0}\frac{e^{2h}-1}{2h}\right) \times 2 \\
+        &= e^{2x} \cdot 1 \cdot 2 \\
+        &= 2e^{2x}
+    \end{multiequation}
+    So, $\frac{d}{dx}(e^{2x})=2e^{2x}$.
+
+    \item If $y=\sin x+e^{x}$, find $\frac{dy}{dx}$.
+    
+    \textbf{Solution:}
+    \begin{multiequation}
+        \frac{dy}{dx} &= \frac{d}{dx}(\sin x+e^{x}) \\
+        &= \frac{d}{dx}(\sin x)+\frac{d}{dx}(e^{x}) \\
+        &= \cos x+e^{x}
+    \end{multiequation}
+
+    \item If $y=x^{2}+\sin^{-1}x+\log_{e}x$, find $\frac{dy}{dx}$.
+    
+    \textbf{Solution:}
+    \begin{multiequation}
+        \frac{dy}{dx} &= \frac{d}{dx}(x^{2})+\frac{d}{dx}(\sin^{-1}x)+\frac{d}{dx}(\log_{e}x) \\
+        &= 2x^{2-1}+\frac{1}{\sqrt{1-x^{2}}}+\frac{1}{x} \\
+        &= 2x+\frac{1}{\sqrt{1-x^{2}}}+\frac{1}{x}
+    \end{multiequation}
+
+    \item If $y=e^{x}\sin x$, find $\frac{dy}{dx}$. \fancymarginnote{Hint: Use the product rule if $y=u(x)v(x)$, then $\frac{dy}{dx}=\{\frac{d}{dx}u(x)\}v(x)+u(x)\{\frac{d}{dx}v(x)\}$}
+    
+    \textbf{Solution:}
+    Let $u(x)=e^x$ and $v(x)=\sin x$.
+    \begin{multiequation}
+        \frac{dy}{dx} &= \left(\frac{d}{dx}(e^x)\right)\sin x+e^x\left(\frac{d}{dx}(\sin x)\right) \\
+        &= e^x\sin x+e^x\cos x \\
+        &= e^x(\sin x+\cos x)
+    \end{multiequation}
+
+    \item If $y=\frac{x}{x^{2}+1}$, find $\frac{dy}{dx}$. \fancymarginnote{Hint: Use the quotient rule: $\frac{dy}{dx}=\frac{\{\frac{d}{dx}u(x)\}v(x)-\{\frac{d}{dx}v(x)\}u(x)}{\{v(x)\}^2}$}
+    
+    \textbf{Solution:}
+    Let $u(x)=x$ and $v(x)=x^2+1$.
+    \begin{multiequation}
+        \frac{dy}{dx} &= \frac{(x^{2}+1)\frac{d}{dx}(x)-x\frac{d}{dx}(x^{2}+1)}{(x^{2}+1)^{2}} \\
+        &= \frac{(x^{2}+1)\cdot 1-x\cdot 2x}{(x^{2}+1)^{2}} \\
+        &= \frac{x^{2}+1-2x^{2}}{(x^{2}+1)^{2}} \\
+        &= \frac{1-x^{2}}{(x^{2}+1)^{2}}
+    \end{multiequation}
+
+    \item Evaluate $\int\frac{x+1}{x^{3}+x^{2}-6x}dx$.
+    
+    \textbf{Solution:}
+    First, use partial fraction decomposition:
+    \begin{multiequation}
+        \frac{x+1}{x^{3}+x^{2}-6x} &= \frac{x+1}{x(x^{2}+x-6)} \\
+        &= \frac{x+1}{x(x+3)(x-2)} \\
+        &= \frac{A}{x}+\frac{B}{x-2}+\frac{C}{x+3}
+    \end{multiequation}
+    Setting the numerators equal: $A(x-2)(x+3)+Bx(x+3)+Cx(x-2)=x+1$.
+    The coefficients are found to be $A=-1/6$, $B=3/10$, and $C=-2/15$.
+    \begin{multiequation}
+        \int\frac{x+1}{x^{3}+x^{2}-6x}dx &= \int\left(\frac{-1/6}{x}+\frac{3/10}{x-2}+\frac{-2/15}{x+3}\right)dx \\
+        &= -\frac{1}{6}\int\frac{1}{x}dx+\frac{3}{10}\int\frac{1}{x-2}dx-\frac{2}{15}\int\frac{1}{x+3}dx \\
+        &= -\frac{1}{6}\ln|x|+\frac{3}{10}\ln|x-2|-\frac{2}{15}\ln|x+3|+C
+    \end{multiequation}
+
+    \item Find the indefinite integral of $f(x)=3x^{2}+4x-2$.
+    
+    \textbf{Solution:}
+    \begin{multiequation}
+        \int f(x)dx &= \int(3x^{2}+4x-2)dx \\
+        &= \int3x^{2}dx+\int4xdx-\int2dx \\
+        &= 3\frac{x^{3}}{3}+4\frac{x^{2}}{2}-2x+C \\
+        &= x^{3}+2x^{2}-2x+C
+    \end{multiequation}
+
+    \item Find $\int x\sin xdx$. \fancymarginnote{Hint: Use integration by parts: $\int u dv=uv-\int v du$}
+    
+    \textbf{Solution:}
+    Let $u=x$ and $dv=\sin xdx$.
+    Then $du=dx$ and $v=\int \sin xdx=-\cos x$.
+    \begin{multiequation}
+        \int x\sin xdx &= x(-\cos x)-\int(-\cos x)dx \\
+        &= -x\cos x+\int\cos xdx \\
+        &= -x\cos x+\sin x+C
+    \end{multiequation}
+
+    \item Solve the differential equation $\frac{dy}{dx}=3x^{2}$.
+    
+    \textbf{Solution:}
+
+    \begin{multiequation}
+        \frac{dy}{dx} &= 3x^{2} \\
+        dy &= 3x^{2}dx \\
+        \int dy &= \int 3x^{2}dx \\
+        y &= \frac{3x^3}{3}+C \\
+        y &= x^3+C
+    \end{multiequation}
+    Thus, the correct answer is $y=x^3+C$.
+
+    \item Solve the equation: $(1+y^{2})y'=\frac{3}{x}$.
+    
+    \textbf{Solution:}
+    Separate the variables:
+    \begin{multiequation}
+        (1+y^{2})\frac{dy}{dx} &= \frac{3}{x} \\
+        (1+y^{2})dy &= \frac{3}{x}dx \\
+        \int(1+y^{2})dy &= \int\frac{3}{x}dx \\
+        \int 1 dy + \int y^2 dy &= 3\int \frac{1}{x} dx \\
+        y+\frac{y^{3}}{3} &= 3\ln|x|+\ln C \\
+        y+\frac{y^{3}}{3} &= \ln(C|x|^3) \\
+        e^{y+y^{3}/3} &= C|x|^3
+    \end{multiequation}
 
 \end{enumerate}
 
