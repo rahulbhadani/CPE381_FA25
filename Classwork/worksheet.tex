@@ -696,5 +696,72 @@
 
 \end{enumerate}
 
+
+\section{Sequences and Series}
+
+\begin{enumerate}
+\item
+Show that a sequence given by the term $u_n = \cfrac{2n}{3n+7}$ is strictly increasing.
+
+\textbf{Solution:}
+We can prove this by computing and simplifying the expression $u_{n+1}-u_n$:
+\begin{multiequation}
+u_{n+1}-u_n &= \frac{2(n+1)}{3(n+1)+7} - \frac{2n}{3n+7} \\
+&= \frac{2(n+1)(3n+7) - 2n(3(n+1)+7)}{(3(n+1)+7)(3n+7)} \\
+&= \frac{(6n+14)(3n+10) - (6n^2+20n)}{(3n+10)(3n+7)} \\
+&= \frac{(6n^2+40n+14) - (6n^2+20n)}{(3n+10)(3n+7)} \\
+&= \frac{14}{(3n+10)(3n+7)} > 0, \quad \forall n \in \mathbb{N}.
+\end{multiequation}
+
+\item Show that the sequence $u_n = \cfrac{5n}{n^2+1}$ is strictly decreasing.
+
+\textbf{Solution:}
+
+\begin{multiequation}
+u_{n+1}-u_n &= \frac{5(n+1)}{(n+1)^2+1} - \frac{5n}{n^2+1} \\
+&= \frac{5(n+1)(n^2+1) - 5n((n+1)^2+1)}{((n+1)^2+1)(n^2+1)} \\
+&= \frac{5(n+1)(n^2+1) - 5n(n^2+2n+1+1)}{(n^2+2n+2)(n^2+1)} \\
+&= \frac{5(n^3+n+n^2+1) - 5n(n^2+2n+2)}{(n^2+2n+2)(n^2+1)} \\
+&= \frac{5n^3+5n+5n^2+5 - (5n^3+10n^2+10n)}{(n^2+2n+2)(n^2+1)} \\
+&= \frac{-5n^2-5n+5}{(n^2+2n+2)(n^2+1)} \\
+&= \frac{-5(n^2+n-1)}{(n^2+2n+2)(n^2+1)} < 0, \quad \forall n \in \mathbb{N}.
+\end{multiequation}
+
+\item For $f(x) = \sin(x)$, write down its Maclaurin series.
+
+\textbf{Solution:}
+
+We know that $f \in C^\infty(\mathbb{R})$ and $f^{(n)}(x) = \sin(x + \frac{n\pi}{2})$, $\forall n \in \mathbb{N}$. Then $f^{(n)}(0) = \sin(\frac{n\pi}{2})$, and therefore, the Maclaurin series of $f$ is
+$$x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \dots = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!}.$$
+
+\item Find the Taylor series expansion for $e^{x} + \cos(x)$.
+
+\textbf{Solution:}
+
+\fancymarginnote{Taylor series expansion gives $f(x) = f(a) + f'(a)(x-a) + \cfrac{f''(a)}{2!}(x-a)^2 + \cdots$}
+
+Using Taylor series with $a=0$, 
+
+
+$$
+e^{x} = 1 + x + \cfrac{x^2}{2!} + \cfrac{x^3}{3!} + \cfrac{x^4}{4!} + \cdots 
+$$
+
+and
+
+$$
+\cos(x) =  1- \cfrac{x^2}{2!} + \cfrac{x^4}{4!} - \cfrac{x^6}{6!} + \cdots
+$$
+
+
+Hence,
+
+\begin{multiequation}
+e^{x} + \cos(x) &  = 1 + x + \cfrac{x^2}{2!} + \cfrac{x^3}{3!} + \cfrac{x^4}{4!} + \cdots  + 1- \cfrac{x^2}{2!} + \cfrac{x^4}{4!} - \cfrac{x^6}{6!} + \cdots\\
+& = 1 + x +  \cfrac{x^3}{3!} + 2\cfrac{x^4}{4!} + \cfrac{x^5}{5!} + \cdots
+\end{multiequation}
+
+\end{enumerate}
+
 \end{document}
 
