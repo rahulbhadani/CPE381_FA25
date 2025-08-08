@@ -485,6 +485,128 @@ set(gca, 'FontSize', 15); legend; grid on;
 
 \begin{frame}{Working with Real-life Signal}
 
+\begin{itemize}
+\item Real-life signals are noisy, i.e., not smooth, may not be differentiable at every time points.
+\item May have high frequency noise -- usually due to another process 
+\item May have low frequency noise -- may be due to missing data, packet drop, inefficiency acquisition of data
+\item Non-uniform sampling time
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example of Real-life Signal}
+
+\begin{center}
+\includegraphics[width=0.5\linewidth]{../Code/figures/Ch02_reallife_speed.pdf}
+
+\end{center}
+
+
+\begin{columns}
+\column{0.5\linewidth}
+
+Histogram of $\Delta t$
+
+\begin{center}
+\includegraphics[width=0.5\linewidth]{../Code/figures/Ch02_reallife_speed_deltaT_Histogram.pdf}
+
+\end{center}
+
+
+\column{0.5\linewidth}
+
+\begin{itemize}
+\footnotesize
+\item Speed data was collected from Toyota RAV4.
+\item Mean $\Delta t = 0.025826$.
+
+\item Code at \url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Code/Ch02_real_world_speed_data.m}
+\item Data at \url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Data/vel.csv}
+\end{itemize}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Pre-processing before we can use real-life Signals}
+
+What do we want and what do we need to do?
+
+What do we want?
+\begin{itemize}
+
+\item Signals at uniformly sampled time points.
+\item Remove noise.
+\item Resample at different sampling time or frequency.
+\end{itemize}
+
+What can we do to meet our requirements?
+
+\begin{itemize}
+\item Realign time points by assuming sampling time as constant, equal to mean sampling time.
+
+\item Use interpolation methods for evaluation at new uniformly sampled points. Other techniques using frequency domain exists that we will study.
+
+\item Removing noise is equivalent of smoothing signal data. We will learn in later chapters on smoothing a signal using new tools developed over the course of this semester.
+
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{Interpolation Methods}
+
+
+\begin{talert}{}
+Interpolation finds the value between any two points based on some approximation by fitting a line or a curve.
+\end{talert}
+
+\begin{itemize}
+\item We create uniformly sampled time-points, and approximate signal values at those points to create uniformly-sampled signals.
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{Linear Interpolation}
+Two consecutive points are used to fit a line, and and a signal value is computed over an intermediate time point.
+
+\begin{columns}
+\column{0.5\linewidth}
+\begin{center}
+\includegraphics[width=0.75\linewidth]{../Code/figures/Ch02_line_equation.pdf}
+
+\end{center}
+
+
+\column{0.5\linewidth}
+
+\footnotesize
+\begin{itemize}
+\item A line equation is $x = mt + c$, $m$ is the slope of the line, and $c$ is the intercept.
+
+\item Two-point line equation can equivalently be written as $ x = x_0+ \cfrac{(x_1 - x_0)}{(t_1 - t_0)} (t - t_0)$  
+
+\item $m = \cfrac{(x_1 - x_0)}{(t_1 - t_0)}$, $c = x_0 - m t_0$.
+
+\item For every original consecutive time points $[t_k, t_{k+1}]$, compute the localized line equation, and then, for a new time points   $t_{k}\leq t\leq t_{k+1}$, compute the signal value $x$.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Linear Interpolation: Implementation in MATLAB}
+
+\begin{center}
+\includegraphics[width=0.75\linewidth]{../Code/figures/Ch02_Linear_Interpolation_Resampling.pdf}
+
+\end{center}
+
+
+
+
 \end{frame}
 
 
