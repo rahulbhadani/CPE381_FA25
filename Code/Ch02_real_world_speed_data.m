@@ -44,7 +44,8 @@ yaxis.TickLabelInterpreter = 'latex';
 xlabel(' $\Delta t$','Interpreter', 'latex');
 ylabel('Counts','Interpreter', 'latex');
 set(gca, 'FontSize', 18);
-exportgraphics(f, 'figures/Ch02_reallife_speed_deltaT_Histogram.pdf', 'BackgroundColor', 'none');
+exportgraphics(f, 'figures/Ch02_reallife_speed_deltaT_Histogram.pdf', ...
+    'BackgroundColor', 'none', 'Resolution',900);
 
 
 disp(sprintf("Mean time diff is %f", mean(timediff)));
