@@ -268,98 +268,6 @@ $$
 Hence, the sampling time (or its inverse -- sampling frequency matters).
 \end{frame}
 
-\begin{frame}{Solving Ordinary Differential Equations using Numerical Methods}
-Recognizing that derivatives can be approximated as difference equations in the discrete domain, we have some methods to solve ordinary differential equations, suitable for computer implementations.
-
-Some common numerical methods to solve ODE are:
-\begin{itemize}
-    \item Euler's Method
-    \item Runge-Kutta Method (4th Order)
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Euler's Method}
-\begin{itemize}
-    \item Consider the ODE: $ \frac{dy}{dt} = f(t, y) $
-    \item Initial condition: $ y(t_0) = y_0 $
-    \item Euler's method formula: $ y_{n+1} = y_n + h f(t_n, y_n) $
-    \item Example: $ \frac{dy}{dt} = -2y, \quad y(0) = 1 $
-    \item Using $ h = 0.1 $: $ y_{n+1} = y_n - 0.2y_n = y_n(1 - 0.2) $
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Euler's Method}
-  \textbf{Euler's method:}
-  \begin{equation*}
-    y_{n+1} = y_n + hf(t_n, y_n)
-  \end{equation*}
-  
-  \textbf{Example:} Solve $y' = 2t$ with $y(0) = 1$ using Euler's method with $h = 0.1$
-  \begin{itemize}
-    \item In this case, $f(t, y) = 2t$
-  \end{itemize}
-  \begin{table}
-    \begin{tabular}{c|c|c}
-      $t_n$ & $y_n$ & $y_{n+1}$ \\
-      \hline
-      0 & 1 & 1.0 \\
-      0.1 & 1.0 & 1.02 \\
-      0.2 & 1.02 & 1.06 \\
-      \vdots & \vdots & \vdots
-    \end{tabular}
-  \end{table}
-\end{frame}
-
-\begin{frame}
-\frametitle{Runge-Kutta Method (4th Order)}
-\begin{columns}
-    \column{0.5\linewidth}
-    \begin{itemize}
-          \item Consider the ODE: $ \frac{dy}{dt} = f(t, y) $
-    \item Initial condition: $ y(t_0) = y_0 $
-    \item Runge-Kutta method formula:
-    $$
-    \begin{aligned}
-    k_1 &= h f(t_n, y_n) \\
-    k_2 &= h f\left(t_n + \frac{h}{2}, y_n + h \frac{k_1}{2}\right) \\
-    k_3 &= h f\left(t_n + \frac{h}{2}, y_n + h \frac{k_2}{2}\right) \\
-    k_4 &= h f(t_n + h, y_n + h k_3) \\
-    y_{n+1} &= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
-    \end{aligned}
-    $$
-    \end{itemize}
-
-\column{0.5\linewidth}
-\begin{itemize}
-  
-    \item Example: $ \frac{dy}{dt} = t + y, \quad y(0) = 1 $
-    \item Using $ h = 0.1 $:
-   
-    Write a MATLAB code to implement that.
-\end{itemize}
-\end{columns}
-\end{frame}
-
-
-
-\begin{frame}
-  \frametitle{Runge-Kutta Methods}
-  \textbf{Runge-Kutta methods:}
-  \begin{itemize}
-    \item More accurate than Euler's method
-    \item Use multiple function evaluations at each step
-  \end{itemize}
-  \textbf{Example:} Solve $y' = 2x$ with $y(0) = 1$ using the Runge-Kutta method of order 4 with $h = 0.1$
-  \begin{table}
-    \begin{tabular}{c|c|c}
-      $x_n$ & $y_n$ & $y_{n+1}$ \\
-      \hline
-      \vdots & \vdots & \vdots
-    \end{tabular}
-  \end{table}
-\end{frame}
 
 \section{Numerical Computation in MATLAB}
 
@@ -1066,15 +974,82 @@ See the code for MATLAB function implementation: \url{https://github.com/rahulbh
 
 Demo usage: \url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Code/Ch02_demo_cubic_spline.m}
 
+\vspace{5pt}
+
+\tiny 
+Reference: Numerical Methods for  Engineers and Scientists Using MATLAB, Second Edition,  Ramin S. Esfandiari
 
 \end{frame}
 
-\begin{frame}[containsverbatim]{Differentiation in MATLAB}
+
+\subsection{Differentiation in MATLAB}
+
+\begin{frame}
+    \subsectionpage
+\end{frame}
+
+\begin{frame}{Differentiation in MATLAB}
+
+
+
+Differentiation in MATLAB is achieved through discrete derivation
+
+\footnotesize
+
+\begin{table}[h]
+\centering
+\caption{First Derivative Difference Formulas}
+\begin{tabular}{ll}
+\hline
+\textbf{Difference Formula} & \textbf{First Derivative} \\
+\hline
+Two-point backward & $f'(x_i) = \frac{f(x_i) - f(x_{i-1})}{h}$ \\
+Two-point forward & $f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{h}$ \\
+Two-point central & $f'(x_i) = \frac{f(x_{i+1}) - f(x_{i-1})}{2h}$ \\
+Three-point backward & $f'(x_i) = \frac{f(x_{i-2}) - 4f(x_{i-1}) + 3f(x_i)}{2h}$ \\
+Three-point forward & $f'(x_i) = \frac{-3f(x_i) + 4f(x_{i+1}) - f(x_{i+2})}{2h}$ \\
+Four-point central & $f'(x_i) = \frac{f(x_{i-2}) - 8f(x_{i-1}) + 8f(x_{i+1}) - f(x_{i+2})}{12h}$ \\ \\
+\hline
+\end{tabular}
+\end{table}
+
+Here, $x_i = x[i]$.
+
+\end{frame}
+
+\begin{frame}{Differentiation in MATLAB}
+
+\footnotesize
+
+
+\begin{table}[h]
+\centering
+\caption{Second Derivative Difference Formulas}
+\begin{tabular}{ll}
+\hline
+\textbf{Difference Formula} & \textbf{Second Derivative} \\
+\hline
+Three-point backward & $f''(x_i) = \frac{f(x_{i-2}) - 2f(x_{i-1}) + f(x_i)}{h^2}$ \\
+Three-point forward & $f''(x_i) = \frac{f(x_{i+2}) - 2f(x_{i+1}) + f(x_i)}{h^2}$ \\
+Three-point central & $f''(x_i) = \frac{f(x_{i-1}) - 2f(x_i) + f(x_{i+1})}{h^2}$ \\
+Four-point backward & $f''(x_i) = \frac{-f(x_{i-3}) + 4f(x_{i-2}) - 5f(x_{i-1}) + 2f(x_i)}{h^2}$ \\
+Four-point forward & $f''(x_i) = \frac{2f(x_i) - 5f(x_{i+1}) + 4f(x_{i+2}) - f(x_{i+3})}{h^2}$ \\
+Five-point central & $f''(x_i) = \frac{-f(x_{i-2}) + 16f(x_{i-1}) - 30f(x_i) + 16f(x_{i+1}) - f(x_{i+2})}{12h^2}$ \\ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}[containsverbatim]{Differentiation in MATLAB: Example}
+
+\Large 
+
     $$
     y(t) = \cos(t^2)
     $$
 \end{frame}
-\begin{frame}[containsverbatim]{Differentiation in MATLAB}
+\begin{frame}[containsverbatim]{Differentiation in MATLAB: Example}
     \footnotesize
 \begin{columns}
     \column{0.5\linewidth}
@@ -1114,7 +1089,29 @@ stem(t1(1:length(y1) -1), z1, 'm' );
 \end{columns}
 \end{frame}
 
-\begin{frame}{Integration in MATLAB}
+
+\begin{frame}{Differentiation of a Real Signal}
+
+\begin{center}
+\includegraphics[width=0.9\linewidth]{../Code/figures/Ch02_Differentiation_Real_Signal.pdf}
+
+\footnotesize
+
+Code: 
+
+\url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Code/Ch02_Differentiation_Real_Signal.m}
+
+\end{center}
+
+\end{frame}
+
+\subsection{Integration in MATLAB}
+
+\begin{frame}
+    \subsectionpage
+\end{frame}
+
+\begin{frame}{Integration Example}
 
 \footnotesize
     $$
@@ -1156,6 +1153,128 @@ trapz(x, f)
 \end{frame}
 
 
+
+\subsection{Solving Differential Equation in MATLAB}
+
+\begin{frame}
+    \subsectionpage
+\end{frame}
+
+
+\begin{frame}{Differential Equation: Initial Value Problems}
+
+\begin{itemize}
+\item An nth-order differential equation, requires $n$ conditions
+\item When these conditions are provided at the same initial value of the independent variable, we have an \textbf{initial-value problem (IVP)}.
+\end{itemize}
+
+\vspace{10pt}
+
+\begin{center}
+A single, first-order initial-value problem is formulated as
+
+\begin{multiequation}
+\frac{dx(t)}{dt} = x(t), x(0) = x_0, 0\leq t \leq t_n
+\end{multiequation}
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Solving Ordinary Differential Equations using Numerical Methods}
+Recognizing that derivatives can be approximated as difference equations in the discrete domain, we have some methods to solve ordinary differential equations, suitable for computer implementations.
+
+Some common numerical methods to solve ODE are:
+\begin{itemize}
+    \item Euler's Method
+    \item Runge-Kutta Method (4th Order)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Euler's Method}
+\begin{itemize}
+    \item Consider the ODE: $ \frac{dy}{dt} = f(t, y) $
+    \item Initial condition: $ y(t_0) = y_0 $
+    \item Euler's method formula: $ y_{n+1} = y_n + h f(t_n, y_n) $
+    \item Example: $ \frac{dy}{dt} = -2y, \quad y(0) = 1 $
+    \item Using $ h = 0.1 $: $ y_{n+1} = y_n - 0.2y_n = y_n(1 - 0.2) $
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Euler's Method}
+  \textbf{Euler's method:}
+  \begin{equation*}
+    y_{n+1} = y_n + hf(t_n, y_n)
+  \end{equation*}
+  
+  \textbf{Example:} Solve $y' = 2t$ with $y(0) = 1$ using Euler's method with $h = 0.1$
+  \begin{itemize}
+    \item In this case, $f(t, y) = 2t$
+  \end{itemize}
+  \begin{table}
+    \begin{tabular}{c|c|c}
+      $t_n$ & $y_n$ & $y_{n+1}$ \\
+      \hline
+      0 & 1 & 1.0 \\
+      0.1 & 1.0 & 1.02 \\
+      0.2 & 1.02 & 1.06 \\
+      \vdots & \vdots & \vdots
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Runge-Kutta Method (4th Order)}
+\begin{columns}
+    \column{0.5\linewidth}
+    \begin{itemize}
+          \item Consider the ODE: $ \frac{dy}{dt} = f(t, y) $
+    \item Initial condition: $ y(t_0) = y_0 $
+    \item Runge-Kutta method formula:
+    $$
+    \begin{aligned}
+    k_1 &= h f(t_n, y_n) \\
+    k_2 &= h f\left(t_n + \frac{h}{2}, y_n + h \frac{k_1}{2}\right) \\
+    k_3 &= h f\left(t_n + \frac{h}{2}, y_n + h \frac{k_2}{2}\right) \\
+    k_4 &= h f(t_n + h, y_n + h k_3) \\
+    y_{n+1} &= y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+    \end{aligned}
+    $$
+    \end{itemize}
+
+\column{0.5\linewidth}
+\begin{itemize}
+  
+    \item Example: $ \frac{dy}{dt} = t + y, \quad y(0) = 1 $
+    \item Using $ h = 0.1 $:
+   
+    Write a MATLAB code to implement that.
+\end{itemize}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Runge-Kutta Methods}
+  \textbf{Runge-Kutta methods:}
+  \begin{itemize}
+    \item More accurate than Euler's method
+    \item Use multiple function evaluations at each step
+  \end{itemize}
+  \textbf{Example:} Solve $y' = 2x$ with $y(0) = 1$ using the Runge-Kutta method of order 4 with $h = 0.1$
+  \begin{table}
+    \begin{tabular}{c|c|c}
+      $x_n$ & $y_n$ & $y_{n+1}$ \\
+      \hline
+      \vdots & \vdots & \vdots
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+
 \begin{frame}{Ordinary Differential Equation in MATLAB}
 Solve the initial value problem $ty' + 3y = 0, y(1) = 2$, assuming $t > 0$. We write the equation in standard form: $y' + 3y/t = 0$.
 
@@ -1185,4 +1304,51 @@ cond = y(1) == 2;
 y(t) = dsolve(eqn, cond);
     \end{verbatim}
 \end{frame}
+
+\begin{frame}{Euler's Method Implementation}
+
+Consider $t_0$ be the initial time, $h$ be the sampling time. Then $t_1 = t_0 + h$.
+
+\vspace{10pt}
+
+Using Taylor's Series:
+
+\begin{multiequation}
+x(t_1) & = x(t_0 + h) = x(t_0) + h x'(t_0)  + \cfrac{1}{2!}h^2 x''(t_0) + \cdots + \\
+x(t_1) & \approx x(t_0) + h x'(t_0) 
+\end{multiequation}
+
+\end{frame}
+
+\begin{frame}{Example and MATLAB Implementation of Euler ODE}
+
+Consider $2x' + x(t) = e^{-t}, x(0) = 1/2, 0\leq t\leq 1$
+
+\begin{center}
+
+\includegraphics[width=0.9\linewidth]{../Code/figures/Ch02_demo_EulerODE.pdf}
+
+\end{center}
+
+\tiny
+
+
+
+Code: 
+
+\url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Code/Ch02_EulerODE.m}
+
+
+\url{https://github.com/rahulbhadani/CPE381_FA25/blob/main/Code/Ch02_demo_EulerODE.m}
+
+
+\end{frame}
+
+\begin{frame}{Up Next}
+\begin{itemize}
+    \item Operations on Continuous-time Signals
+\end{itemize}
+    
+\end{frame}
+
 \end{document}
