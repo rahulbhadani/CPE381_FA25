@@ -46,3 +46,6 @@ set(gca, 'FontSize', 18);
 legend('Interpreter','latex');
 xlabel('Time (s), $t$','Interpreter', 'latex');
 ylabel('ODE Solution','Interpreter', 'latex');
+
+exportgraphics(f, 'figures/Ch02_demo_EulerODE.pdf', 'BackgroundColor', 'none');
+

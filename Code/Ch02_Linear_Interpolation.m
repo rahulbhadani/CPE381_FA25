@@ -125,7 +125,7 @@ legend('Interpreter','latex');
 xlim([-2, 1000])
 ylim([-2, 100])
 xlabel('Time (s), $t$','Interpreter', 'latex');
-ylabel('Speed miles/hour','Interpreter', 'latex');
+ylabel('Speed km/hour','Interpreter', 'latex');
 
 % Create zoom inset
 ax2 = axes('Position', [0.57, 0.24, 0.3, 0.4]);

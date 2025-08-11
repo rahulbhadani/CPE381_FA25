@@ -21,7 +21,7 @@ set(gca, 'FontSize', 18);
 legend('Interpreter','latex');
 ylim([-2, 100])
 xlabel('Time (s), $t$','Interpreter', 'latex');
-ylabel('Speed miles/hour','Interpreter', 'latex');
+ylabel('Speed km/hour','Interpreter', 'latex');
 
 exportgraphics(f, 'figures/Ch02_reallife_speed.pdf', 'BackgroundColor', 'none');
 
